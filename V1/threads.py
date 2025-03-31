@@ -8,11 +8,12 @@ import os
 class Yolo11AnalysisThread(QThread):
     analysis_finished = pyqtSignal(str)
 
-    def __init__(self, video_path, model_name, target_folder, parent=None):
+    def __init__(self, video_path, model_name, target_folder, target_fps=15, parent=None):
         super().__init__(parent)
         self.video_path = video_path
         self.model_name = model_name
         self.target_folder = target_folder
+        self.target_fps = target_fps
 
     def run(self):
         """Exécute l'analyse dans un thread séparé."""
@@ -21,11 +22,11 @@ class Yolo11AnalysisThread(QThread):
         # Initialiser l'analyse
         analysis = Yolo11VideoAnalysis(self.target_folder)
         video_folder, video_name = analysis.extract_and_process_frames(
-            self.video_path, target_fps=15, model_name=self.model_name, existing_folder=self.target_folder
+            self.video_path, target_fps=self.target_fps, model_name=self.model_name, existing_folder=self.target_folder
         )
         if video_folder:
             analysis.create_video_from_frames(
-                os.path.join(video_folder, "Analysed_Frames"), video_name, video_folder, fps=15
+                os.path.join(video_folder, "Analysed_Frames"), video_name, video_folder, fps=self.target_fps
             )
             self.analysis_finished.emit(os.path.join(video_folder, f"{video_name}_Analysed.mp4"))
 
@@ -33,7 +34,7 @@ class Yolo11AnalysisThread(QThread):
 class Yolo8AnalysisThread(QThread):
     analysis_finished = pyqtSignal(str)
 
-    def __init__(self, analysis_folder, video_path, target_fps=1, parent=None):
+    def __init__(self, analysis_folder, video_path, target_fps=15, parent=None):
         super().__init__(parent)
         self.analysis_folder = analysis_folder
         self.video_path = video_path
