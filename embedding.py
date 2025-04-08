@@ -15,7 +15,9 @@ model, preprocess = clip.load("ViT-B/32", device=device)
 
 def extract_embedding(frames):
     image_embedding = model.encode_image(frames).float()
-    return image_embedding.cpu().numpy()
+    image_embedding /= image_embedding.norm(dim=-1, keepdim=True)
+    image_embedding = image_embedding.to(device)
+    return image_embedding.cpu()
 
 def compute_similarity(embedding1, embedding2):
     """
@@ -23,3 +25,7 @@ def compute_similarity(embedding1, embedding2):
     """
     similarity_cos = 1 - cosine(embedding1.flatten(), embedding2.flatten())
     return similarity_cos
+
+
+
+
