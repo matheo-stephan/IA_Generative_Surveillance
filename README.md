@@ -173,10 +173,7 @@ Cette méthode consiste à récupérer les **X images les plus proches** de la r
 
 **Utilisation typique :**
 ```python
-results = collection.query(
-    query_embeddings=[query_embedding],
-    n_results=top_x
-)
+top_x_similar = sorted(similarities, key=lambda x: x["similarity"], reverse=True)[:top_x] 
 ```
 Les X images avec la similarité la plus élevée sont ensuite copiées dans un dossier top_x_similar pour être visualisées.
 
