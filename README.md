@@ -68,7 +68,7 @@ Permet de recréer une vidéo à partir des images traitées.
 
 ## 🔍 Recherche sémantique
 
-`find_similar_images(frames_dir, query_embedding, similarity_threshold, top_x)`
+```find_similar_images(frames_dir, query_embedding, similarity_threshold, top_x)```
 Calcule la similarité entre l’embedding texte (`query_embedding`) et ceux de chaque image dans la base de données vectorielle (`ChromaDB`).
 
 **Deux critères :**
@@ -78,6 +78,48 @@ Calcule la similarité entre l’embedding texte (`query_embedding`) et ceux de 
 
 **✅ Le système adapte dynamiquement le seuil si demandé, en retirant 10% à la similarité maximale détectée.**
 
+## 📐 Similarité
+
+Le système utilise **la similarité cosinus** pour comparer les vecteurs d'embedding d'une image et d'un texte.
+
+#### 🔍 Qu'est-ce que la similarité cosinus ?
+
+La similarité cosinus mesure **l’angle** entre deux vecteurs dans un espace vectoriel. Elle ne prend pas en compte la norme (la taille) des vecteurs, mais seulement leur direction.
+
+Elle est calculée avec la formule suivante :
+```
+similarity(A, B) = (A ⋅ B) / (||A|| * ||B||)
+```
+- `A ⋅ B` est le produit scalaire des deux vecteurs.
+- `||A||` et `||B||` sont les normes (longueurs) des vecteurs.
+
+#### 🎯 Interprétation des valeurs
+
+- **1.0** → les vecteurs pointent exactement dans la même direction (sémantiquement identiques).
+- **0.0** → les vecteurs sont orthogonaux (aucune similarité).
+- **< 0** → vecteurs opposés (sans lien), mais rarement observé ici car les vecteurs sont généralement **positifs** et **normalisés**.
+
+#### 🧠 Pourquoi la normalisation ?
+
+Les embeddings sont souvent **L2-normalisés**, c’est-à-dire que leur norme est ramenée à 1 :
+
+```
+embedding = embedding / embedding.norm(dim=-1, keepdim=True)
+```
+Cela permet que la similarité cosinus soit simplement le produit scalaire entre deux vecteurs de norme unitaire.
+
+### 📊 Utilisation dans le projet
+Dans ce projet, on compare un embedding texte à des embeddings image :
+```
+similarity = cosine_similarity(text_embedding, image_embedding)[0][0]
+```
+
+**Puis :**
+
+- On trie les résultats par ordre décroissant de similarité.
+- On garde ceux au-dessus d’un seuil dynamique (90% de la similarité maximale observée).
+- On sauvegarde les X meilleurs résultats dans un dossier dédié.
+  
 ---
 
 # 🧪 Tests de Robustesse
