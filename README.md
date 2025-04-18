@@ -142,7 +142,7 @@ Ce projet utilise **ChromaDB** comme base de données vectorielle pour indexer e
 
 ## 🧠 Qu'est-ce qu'une base de données vectorielle ?
 
-Une base de données vectorielle permet de stocker des **vecteurs d'embedding** et d'effectuer des recherches de similarité entre eux de manière rapide et scalable. Contrairement aux bases de données classiques qui indexent des textes ou des valeurs numériques simples, ici ce sont des vecteurs à haute dimension (souvent 512 ou 768 dimensions) qui sont stockés.
+Une base de données vectorielle permet de stocker des **vecteurs d'embedding** et d'effectuer des recherches de similarité entre eux de manière rapide et scalable. Contrairement aux bases de données classiques qui indexent des textes ou des valeurs numériques simples, ici ce sont des vecteurs à haute dimension (souvent 768 dimensions) qui sont stockés.
 
 Chaque vecteur représente la **sémantique d’une image** (ou d’un texte) générée par un modèle de type CLIP.
 
