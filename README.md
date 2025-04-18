@@ -162,17 +162,33 @@ collection.add(
     metadatas=[{"video_name": "video_demo", "frame_index": 12}]
 )
 ```
-## 🔍 Recherche par similarité
+### 🔍 Recherche par similarité
 
-Quand une requête texte est encodée en vecteur (query_embedding), on cherche les images les plus proches dans l’espace vectoriel :
+Dans ce projet, une fois les embeddings texte et image extraits et stockés dans ChromaDB, nous utilisons la **similarité cosinus** pour retrouver les images les plus proches d'une requête textuelle. La similarité cosinus mesure l'angle entre deux vecteurs dans l'espace, et varie entre -1 (opposés) et 1 (identiques).
 
-``` python
+#### Deux approches sont utilisées pour filtrer les résultats :
+
+#### 🧪 1. Recherche `top_x` (meilleures similarités)
+Cette méthode consiste à récupérer les **X images les plus proches** de la requête, peu importe leur score exact.
+
+**Utilisation typique :**
+```python
 results = collection.query(
     query_embeddings=[query_embedding],
-    n_results=10
+    n_results=top_x
 )
 ```
-Cela renvoie les `n` images ayant la plus forte similarité cosinus avec la requête. ChromaDB s’occupe d’optimiser la recherche pour éviter de comparer le vecteur à chaque élément un par un, ce qui serait très lent à grande échelle.
+Les X images avec la similarité la plus élevée sont ensuite copiées dans un dossier top_x_similar pour être visualisées.
+
+#### 📏 2. Recherche above_threshold (filtrage par seuil)
+Cette méthode consiste à ne garder que les images dont la similarité dépasse une certaine valeur seuil.
+
+Le seuil peut être fixé manuellement (similarity_threshold = 0.18), ou défini dynamiquement comme suit :
+```python
+max_similarity = max([sim for _, sim in similarities])
+similarity_threshold = max_similarity * 0.90  # 90% du maximum
+```
+Seules les images ayant une similarité supérieure ou égale à ce seuil sont conservées et stockées dans un dossier above_threshold.
 
 ## 📁 Organisation par vidéo
 
@@ -186,7 +202,6 @@ Chaque vidéo analysée est liée à une collection différente, identifiée via
 - L’embedding est ajouté à la collection correspondant à la vidéo.
 - Lors de la recherche, l’embedding du texte est comparé à tous ceux de la collection.
 - Les résultats sont triés, et les meilleures images sont copiées dans des dossiers (`top_x_similar`, `above_threshold`).
-
 
 --- 
 
