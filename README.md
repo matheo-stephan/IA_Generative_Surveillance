@@ -52,9 +52,9 @@ TARGET_SIZE = (640, 360)  # Dimensions de sortie des frames
 - Création d’un répertoire unique pour stocker les frames (via `create_unique_folder`).
 
 ## 📹 3. Génération vidéo à partir de frames
-`
+```
 create_video_from_frames(frames_dir, output_path, fps)
-`
+```
 Permet de recréer une vidéo à partir des images traitées.
 
 ---
@@ -123,7 +123,7 @@ Placez votre vidéo dans un dossier accessible, par exemple :
 ## 2. 🖼️ Extraire et redimensionner les frames
 
 Appelez la fonction suivante :
-`
+```
 frames_dir = extract_and_resize_frames(
     video_path=video_path,
     output_dir="path/to/output/frames",
@@ -131,38 +131,38 @@ frames_dir = extract_and_resize_frames(
     target_size=TARGET_SIZE,
     start_frame=0  # optionnel
 )
-`
+```
 Cela extrait les frames, les redimensionne et les stocke dans un dossier.
 
 ## 3. 🔎 Encoder les images extraites
 
 Parcourez le dossier de frames pour encoder chaque image via CLIP :
-`
+```
 for frame in os.listdir(frames_dir):
     image_path = os.path.join(frames_dir, frame)
     embedding = encode_image(image_path)  # ou via votre classe
     # Insérez dans ChromaDB avec image_id = nom du fichier
-`
+```
 
 ## 4. 💬 Entrer une requête texte
 
 Encodez votre requête :
-`
+```
 query = "Person walking in a park"
 query_embedding = get_text_embedding(query)
-`
+```
 
 ## 5. 🧠 Trouver les images similaires
 
 Appelez la fonction de comparaison :
-`
+```
 find_similar_images(
     frames_dir=frames_dir,
     query_embedding=query_embedding,
     similarity_threshold=None,  # auto-threshold si None
     top_x=50
 )
-`
+```
 Cela copie :
 
 - Les images au-dessus du seuil calculé dynamiquement.
@@ -171,10 +171,10 @@ Cela copie :
 ## 6. 🎥 Recréer une vidéo (optionnel)
 
 Vous pouvez ensuite recompiler les frames similaires en une vidéo :
-`
+```
 create_video_from_frames(
     frames_dir="path/to/frames/analysed_frames",
     output_path="path/to/output_video.mp4",
     fps=FPS_TARGET
 )
-`
+```
