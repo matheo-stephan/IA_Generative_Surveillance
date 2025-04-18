@@ -52,7 +52,7 @@ TARGET_SIZE = (640, 360)  # Dimensions de sortie des frames
 - Création d’un répertoire unique pour stocker les frames (via `create_unique_folder`).
 
 ## 📹 3. Génération vidéo à partir de frames
-```
+```python
 create_video_from_frames(frames_dir, output_path, fps)
 ```
 Permet de recréer une vidéo à partir des images traitées.
@@ -68,7 +68,9 @@ Permet de recréer une vidéo à partir des images traitées.
 
 ## 🔍 Recherche sémantique
 
-```find_similar_images(frames_dir, query_embedding, similarity_threshold, top_x)```
+```python
+find_similar_images(frames_dir, query_embedding, similarity_threshold, top_x)
+```
 Calcule la similarité entre l’embedding texte (`query_embedding`) et ceux de chaque image dans la base de données vectorielle (`ChromaDB`).
 
 **Deux critères :**
@@ -87,7 +89,7 @@ Le système utilise **la similarité cosinus** pour comparer les vecteurs d'embe
 La similarité cosinus mesure **l’angle** entre deux vecteurs dans un espace vectoriel. Elle ne prend pas en compte la norme (la taille) des vecteurs, mais seulement leur direction.
 
 Elle est calculée avec la formule suivante :
-```
+```python
 similarity(A, B) = (A ⋅ B) / (||A|| * ||B||)
 ```
 - `A ⋅ B` est le produit scalaire des deux vecteurs.
@@ -103,14 +105,14 @@ similarity(A, B) = (A ⋅ B) / (||A|| * ||B||)
 
 Les embeddings sont souvent **L2-normalisés**, c’est-à-dire que leur norme est ramenée à 1 :
 
-```
+```python
 embedding = embedding / embedding.norm(dim=-1, keepdim=True)
 ```
 Cela permet que la similarité cosinus soit simplement le produit scalaire entre deux vecteurs de norme unitaire.
 
 ### 📊 Utilisation dans le projet
 Dans ce projet, on compare un embedding texte à des embeddings image :
-```
+```python
 similarity = cosine_similarity(text_embedding, image_embedding)[0][0]
 ```
 
@@ -165,7 +167,7 @@ Placez votre vidéo dans un dossier accessible, par exemple :
 ## 2. 🖼️ Extraire et redimensionner les frames
 
 Appelez la fonction suivante :
-```
+```python
 frames_dir = extract_and_resize_frames(
     video_path=video_path,
     output_dir="path/to/output/frames",
@@ -179,7 +181,7 @@ Cela extrait les frames, les redimensionne et les stocke dans un dossier.
 ## 3. 🔎 Encoder les images extraites
 
 Parcourez le dossier de frames pour encoder chaque image via CLIP :
-```
+```python
 for frame in os.listdir(frames_dir):
     image_path = os.path.join(frames_dir, frame)
     embedding = encode_image(image_path)  # ou via votre classe
@@ -189,7 +191,7 @@ for frame in os.listdir(frames_dir):
 ## 4. 💬 Entrer une requête texte
 
 Encodez votre requête :
-```
+```python
 query = "Person walking in a park"
 query_embedding = get_text_embedding(query)
 ```
@@ -197,7 +199,7 @@ query_embedding = get_text_embedding(query)
 ## 5. 🧠 Trouver les images similaires
 
 Appelez la fonction de comparaison :
-```
+```python
 find_similar_images(
     frames_dir=frames_dir,
     query_embedding=query_embedding,
@@ -213,7 +215,7 @@ Cela copie :
 ## 6. 🎥 Recréer une vidéo (optionnel)
 
 Vous pouvez ensuite recompiler les frames similaires en une vidéo :
-```
+```python
 create_video_from_frames(
     frames_dir="path/to/frames/analysed_frames",
     output_path="path/to/output_video.mp4",
