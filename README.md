@@ -2,7 +2,7 @@
 
 ---
 
-## 🧩 Objectif du Projet
+# 🧩 Objectif du Projet
 
 **Ce projet a pour objectif de mettre en place un benchmark vidéo basé sur le dataset UCF Crimes, permettant :**
 
@@ -13,7 +13,7 @@
 
 ---
 
-## ⚙️ Dépendances
+# ⚙️ Dépendances
 
 **Les bibliothèques suivantes sont nécessaires au bon fonctionnement :**
 
@@ -32,14 +32,14 @@
 
 ---
 
-## 📂 Structure Principale du Projet
+# 📂 Structure Principale du Projet
 
-# 🔧 1. Paramètres de configuration
+## 🔧 1. Paramètres de configuration
 `
 FPS_TARGET = 24   # Frame rate cible
 TARGET_SIZE = (640, 360)  # Dimensions de sortie des frames
 `
-# 📁 2. Extraction et redimensionnement des frames
+## 📁 2. Extraction et redimensionnement des frames
 
 **Fonctions :**
 
@@ -51,7 +51,7 @@ TARGET_SIZE = (640, 360)  # Dimensions de sortie des frames
 - Gestion automatique des FPS et adaptation de start_frame.
 - Création d’un répertoire unique pour stocker les frames (via `create_unique_folder`).
 
-# 📹 3. Génération vidéo à partir de frames
+## 📹 3. Génération vidéo à partir de frames
 `
 create_video_from_frames(frames_dir, output_path, fps)
 `
@@ -59,14 +59,14 @@ Permet de recréer une vidéo à partir des images traitées.
 
 ---
 
-## 🤖 Encodage et Similarité
+# 🤖 Encodage et Similarité
 
-# 💡 Encodage
+## 💡 Encodage
 
 - Utilisation du modèle OpenAI CLIP (`openai/clip-vit-base-patch32`) pour produire des embeddings vectoriels à partir d’images et de textes.
 - Normalisation des vecteurs (`L2 norm`) après encodage.
 
-# 🔍 Recherche sémantique
+## 🔍 Recherche sémantique
 
 `find_similar_images(frames_dir, query_embedding, similarity_threshold, top_x)`
 Calcule la similarité entre l’embedding texte (`query_embedding`) et ceux de chaque image dans la base de données vectorielle (`ChromaDB`).
@@ -80,7 +80,7 @@ Calcule la similarité entre l’embedding texte (`query_embedding`) et ceux de 
 
 ---
 
-## 🧪 Tests de Robustesse
+# 🧪 Tests de Robustesse
 
 **Fonction intégrée :**
 
@@ -90,7 +90,7 @@ Calcule la similarité entre l’embedding texte (`query_embedding`) et ceux de 
 
 ---
 
-## 💾 Stockage vectoriel avec ChromaDB
+# 💾 Stockage vectoriel avec ChromaDB
 
 - Utilisation de Chroma comme base de données vectorielle.
 - Les vecteurs sont insérés avec leurs métadonnées, ce qui permet une récupération simple de l’image associée.
@@ -98,7 +98,7 @@ Calcule la similarité entre l’embedding texte (`query_embedding`) et ceux de 
 
 --- 
 
-## 🔄 Pipeline Complet
+# 🔄 Pipeline Complet
 
 1. Charger une vidéo
 2. Extraire & redimensionner les frames
@@ -111,16 +111,16 @@ Calcule la similarité entre l’embedding texte (`query_embedding`) et ceux de 
 
 --- 
 
-## 🚀 Guide d’utilisation du programme
+# 🚀 Guide d’utilisation du programme
 
 Cette section décrit comment utiliser le système étape par étape, depuis l’entrée d’une vidéo jusqu’à l’obtention des résultats de similarité.
 
-# 1. 📥 Préparer votre vidéo
+## 1. 📥 Préparer votre vidéo
 
 Placez votre vidéo dans un dossier accessible, par exemple :
 `video_path = "path/to/your/video.mp4"`
 
-# 2. 🖼️ Extraire et redimensionner les frames
+## 2. 🖼️ Extraire et redimensionner les frames
 
 Appelez la fonction suivante :
 `
@@ -134,7 +134,7 @@ frames_dir = extract_and_resize_frames(
 `
 Cela extrait les frames, les redimensionne et les stocke dans un dossier.
 
-# 3. 🔎 Encoder les images extraites
+## 3. 🔎 Encoder les images extraites
 
 Parcourez le dossier de frames pour encoder chaque image via CLIP :
 `
@@ -144,7 +144,7 @@ for frame in os.listdir(frames_dir):
     # Insérez dans ChromaDB avec image_id = nom du fichier
 `
 
-# 4. 💬 Entrer une requête texte
+## 4. 💬 Entrer une requête texte
 
 Encodez votre requête :
 `
@@ -152,7 +152,7 @@ query = "Person walking in a park"
 query_embedding = get_text_embedding(query)
 `
 
-# 5. 🧠 Trouver les images similaires
+## 5. 🧠 Trouver les images similaires
 
 Appelez la fonction de comparaison :
 `
@@ -168,7 +168,7 @@ Cela copie :
 - Les images au-dessus du seuil calculé dynamiquement.
 - Les Top X plus similaires dans deux sous-dossiers distincts.
 
-# 6. 🎥 Recréer une vidéo (optionnel)
+## 6. 🎥 Recréer une vidéo (optionnel)
 
 Vous pouvez ensuite recompiler les frames similaires en une vidéo :
 `
