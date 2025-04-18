@@ -35,7 +35,7 @@
 # 📂 Structure Principale du Projet
 
 ## 🔧 1. Paramètres de configuration
-```
+```python
 FPS_TARGET = 24   # Frame rate cible
 TARGET_SIZE = (640, 360)  # Dimensions de sortie des frames
 ```
