@@ -185,8 +185,8 @@ Cette méthode consiste à ne garder que les images dont la similarité dépasse
 
 Le seuil peut être fixé manuellement (similarity_threshold = 0.18), ou défini dynamiquement comme suit :
 ```python
-max_similarity = max([sim for _, sim in similarities])
-similarity_threshold = max_similarity * 0.90  # 90% du maximum
+max_similarity = max(similarities, key=lambda x: x["similarity"])["similarity"]
+similarity_threshold = max_similarity * 0.9 # 90% du maximum
 ```
 Seules les images ayant une similarité supérieure ou égale à ce seuil sont conservées et stockées dans un dossier above_threshold.
 
