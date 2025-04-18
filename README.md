@@ -131,7 +131,7 @@ similarity = cosine_similarity(text_embedding, image_embedding)[0][0]
 ```python
 add_salt_pepper_noise(image, amount=0.05)
 ```
-- Ajoute un bruit de type "sel et poivre" à une image.
+- Ajoute un bruit de type "sel et poivre" (ajout aléatoire de pixel blanc ou noir) à une image.
 - Permet de tester la robustesse de la reconnaissance visuelle par similarité.
 
 ---
