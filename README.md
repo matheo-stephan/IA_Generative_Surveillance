@@ -138,9 +138,55 @@ add_salt_pepper_noise(image, amount=0.05)
 
 # 💾 Stockage vectoriel avec ChromaDB
 
-- Utilisation de Chroma comme base de données vectorielle.
-- Les vecteurs sont insérés avec leurs métadonnées, ce qui permet une récupération simple de l’image associée.
-- Si aucune métadonnée n’est stockée, on peut utiliser les noms de fichiers comme identifiants pour retrouver l’image d’origine.
+Ce projet utilise **ChromaDB** comme base de données vectorielle pour indexer et rechercher efficacement les embeddings des images extraites depuis des vidéos.
+
+## 🧠 Qu'est-ce qu'une base de données vectorielle ?
+
+Une base de données vectorielle permet de stocker des **vecteurs d'embedding** et d'effectuer des recherches de similarité entre eux de manière rapide et scalable. Contrairement aux bases de données classiques qui indexent des textes ou des valeurs numériques simples, ici ce sont des vecteurs à haute dimension (souvent 512 ou 768 dimensions) qui sont stockés.
+
+Chaque vecteur représente la **sémantique d’une image** (ou d’un texte) générée par un modèle de type CLIP.
+
+## 🏗️ Structure de ChromaDB
+
+Chaque vecteur est stocké dans une **collection**. Une collection contient :
+- `id` : un identifiant unique (ex. nom de frame)
+- `embedding` : le vecteur numérique représentant l’image
+- `document` *(optionnel)* : texte associé (non utilisé ici)
+- `metadata` : informations supplémentaires (par exemple le nom de la vidéo, l'index de frame, etc.)
+
+Exemple d’ajout d’un vecteur :
+```python
+collection.add(
+    ids=["frame_000012.png"],
+    embeddings=[image_embedding],
+    metadatas=[{"video_name": "video_demo", "frame_index": 12}]
+)
+```
+## 🔍 Recherche par similarité
+
+Quand une requête texte est encodée en vecteur (query_embedding), on cherche les images les plus proches dans l’espace vectoriel :
+
+``` python
+results = collection.query(
+    query_embeddings=[query_embedding],
+    n_results=10
+)
+```
+Cela renvoie les `n` images ayant la plus forte similarité cosinus avec la requête. ChromaDB s’occupe d’optimiser la recherche pour éviter de comparer le vecteur à chaque élément un par un, ce qui serait très lent à grande échelle.
+
+## 📁 Organisation par vidéo
+
+Chaque vidéo analysée est liée à une collection différente, identifiée via son nom (souvent `sanitized_video_name`). Cela permet de séparer les résultats par vidéo et d’éviter les collisions.
+
+## 🎯 Intégration dans le pipeline
+
+**Voici comment ChromaDB est utilisé dans le programme :**
+
+- À chaque extraction de frame → l’image est encodée en embedding.
+- L’embedding est ajouté à la collection correspondant à la vidéo.
+- Lors de la recherche, l’embedding du texte est comparé à tous ceux de la collection.
+- Les résultats sont triés, et les meilleures images sont copiées dans des dossiers (`top_x_similar`, `above_threshold`).
+
 
 --- 
 
