@@ -98,7 +98,7 @@ applauding, bathing dog, beatboxing, being in zero gravity, bench pressing, bobs
 
 ## Exemple de recherche par requête
 Pour la requête "people playing outdoor", les 5 meilleurs résultats étaient :
-```
+```python
 ID Vidéo	Frame	Étiquette	Similarité
 video_168	[Img]	juggling fire	0.2741
 video_167	[Img]	threading needle	0.2712
