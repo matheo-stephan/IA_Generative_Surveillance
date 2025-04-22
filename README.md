@@ -66,7 +66,7 @@ Affichage des résultats : Les résultats sont affichés dans un fichier HTML (s
 
 ## Métriques obtenues
 Les métriques suivantes ont été obtenues après l'analyse des 218 vidéos :
-
+```
 Précision@1 : 0.43
 43 % des frames ont été correctement associées à leur étiquette réelle en première position.
 Précision@3 : 0.53
@@ -75,7 +75,7 @@ Distance moyenne (correcte) : 0.25
 Similarité cosinus moyenne entre les frames et leurs requêtes textuelles correctes.
 Distance moyenne (incorrecte) : 0.20
 Similarité cosinus moyenne entre les frames et les requêtes textuelles incorrectes.
-
+```
 
 ## Distribution des similarités
 L'histogramme de l'image similarity_distribution.png visualise la distribution des similarités cosinus pour les paires correctes et incorrectes :
