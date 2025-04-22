@@ -98,13 +98,14 @@ applauding, bathing dog, beatboxing, being in zero gravity, bench pressing, bobs
 
 ## Exemple de recherche par requête
 Pour la requête "people playing outdoor", les 5 meilleurs résultats étaient :
-
+```
 ID Vidéo	Frame	Étiquette	Similarité
 video_168	[Img]	juggling fire	0.2741
 video_167	[Img]	threading needle	0.2712
 video_54	[Img]	tackling	0.2663
 video_153	[Img]	getting a haircut	0.2627
 video_185	[Img]	snowkiting	0.2573
+```
 Note sur les valeurs de similarité :
 
 Les exécutions précédentes du script ont donné des scores de similarité négatifs (par exemple, -0.4519), ce qui était incorrect pour la similarité cosinus. Ce problème a été corrigé en :
@@ -117,15 +118,17 @@ Les similarités actuelles (par exemple, 0.2741) sont maintenant positives et da
 ## Aperçu du code
 Script principal : V2_kinetics.ipynb
 Ce script orchestre l'ensemble du flux de travail :
-
+```
 Extraction des frames : Extrait la frame centrale de chaque vidéo avec OpenCV.
 Génération des embeddings : Utilise CLIP (ViT-B/32) pour encoder les frames et les requêtes textuelles en embeddings, avec une normalisation explicite.
 Stockage dans ChromaDB : Stocke les embeddings des frames dans une collection ChromaDB.
 Calcul des similarités : Calcule une matrice de similarité entre les frames et les requêtes textuelles.
 Calcul des métriques : Calcule la précision@1, la précision@3 et les distances moyennes.
 Visualisation : Génère des fichiers HTML (results_kinetics.html, search_results_*.html) et un histogramme de distribution des similarités (similarity_distribution.png).
+```
 Recherche interactive : Permet aux utilisateurs de saisir des requêtes textuelles et de récupérer les frames les plus similaires.
 Fonctions clés
+```
 extract_single_frame(video_path) : Extrait la frame centrale d'une vidéo.
 encode_image(image_path) : Encode une image en un embedding CLIP avec normalisation.
 encode_text(text) : Encode une requête textuelle en un embedding CLIP avec normalisation.
@@ -134,9 +137,10 @@ generate_results_html(...) : Génère le fichier HTML des résultats principaux.
 plot_similarity_distribution(correct_distances, incorrect_distances) : Génère l'histogramme de distribution des similarités.
 search_similar_images(query, top_k) : Recherche les frames les plus similaires à une requête textuelle.
 display_search_results(...) : Génère un fichier HTML pour les résultats des requêtes de recherche.
+```
 Dépendances
 Le projet repose sur les bibliothèques Python suivantes :
-
+```
 numpy : Pour les opérations numériques.
 torch : Pour exécuter le modèle CLIP.
 opencv-python-headless : Pour l'extraction des frames vidéo.
@@ -145,6 +149,7 @@ chromadb : Pour le stockage et la recherche dans la base de données vectorielle
 clip (de openai-clip) : Pour le modèle CLIP et le prétraitement.
 sklearn : Pour le calcul de la similarité cosinus.
 matplotlib : Pour tracer la distribution des similarités.
+```
 Installez-les avec :
 
 ```bash
