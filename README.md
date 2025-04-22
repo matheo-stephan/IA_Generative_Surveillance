@@ -51,11 +51,13 @@ Stockage : Les embeddings des frames sont stockés dans une base de données vec
 ## 3. Calcul des similarités
 Matrice de similarité : Une matrice de similarité est calculée entre tous les embeddings des frames et des textes en utilisant la similarité cosinus. Cette matrice est utilisée pour évaluer la capacité de CLIP à associer les frames aux descriptions d'actions correspondantes.
 Métriques :
+```
 Précision@1 : Pourcentage de frames où la requête textuelle la mieux notée correspond à l'étiquette réelle.
 Précision@3 : Pourcentage de frames où l'étiquette réelle est parmi les 3 requêtes textuelles les mieux notées.
 Distance moyenne (correcte) : Similarité cosinus moyenne entre une frame et sa requête textuelle correcte.
 Distance moyenne (incorrecte) : Similarité cosinus moyenne entre une frame et les requêtes textuelles incorrectes.
 Distribution des similarités : Un histogramme est généré pour visualiser la distribution des similarités cosinus pour les paires correctes (frame et texte correct) et incorrectes (frame et texte incorrect).
+```
 ## 4. Recherche par requête textuelle
 Recherche interactive : Les utilisateurs peuvent entrer une requête textuelle (par exemple, "people playing outdoor"). La requête est encodée en un embedding avec CLIP, et ChromaDB récupère les frames les plus similaires en fonction de la similarité cosinus.
 Recalcul manuel des similarités : Pour garantir des similarités précises, le script récupère les embeddings depuis ChromaDB et recalcule les similarités cosinus manuellement, en s'assurant que les valeurs restent dans l'intervalle [0, 1].
