@@ -23,7 +23,7 @@ getting a haircut
 ## Structure du projet
 Le projet est organisé selon la structure de répertoire suivante :
 
-
+```
 C:/Users/SANGLI Kenneth/Documents/project_root/
 │
 ├── videos/                     # Répertoire contenant les fichiers vidéo téléchargés (video_1.mp4 à video_218.mp4)
@@ -37,6 +37,7 @@ C:/Users/SANGLI Kenneth/Documents/project_root/
 │   └── search_results_*.html   # Fichiers HTML pour les résultats des requêtes de recherche
 ├── chroma_db/                  # Répertoire pour la base de données vectorielle ChromaDB
 └── V2_kinetics.ipynb   # Script principal du projet
+```
 
 ## Fonctionnement
 ## 1. Préparation des données
