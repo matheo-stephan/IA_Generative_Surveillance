@@ -120,7 +120,7 @@ Les similarités actuelles (par exemple, 0.2741) sont maintenant positives et da
 ## Aperçu du code
 Script principal : V2_kinetics.ipynb
 Ce script orchestre l'ensemble du flux de travail :
-```
+```python
 Extraction des frames : Extrait la frame centrale de chaque vidéo avec OpenCV.
 Génération des embeddings : Utilise CLIP (ViT-B/32) pour encoder les frames et les requêtes textuelles en embeddings, avec une normalisation explicite.
 Stockage dans ChromaDB : Stocke les embeddings des frames dans une collection ChromaDB.
@@ -130,7 +130,7 @@ Visualisation : Génère des fichiers HTML (results_kinetics.html, search_result
 ```
 Recherche interactive : Permet aux utilisateurs de saisir des requêtes textuelles et de récupérer les frames les plus similaires.
 Fonctions clés
-```
+```python
 extract_single_frame(video_path) : Extrait la frame centrale d'une vidéo.
 encode_image(image_path) : Encode une image en un embedding CLIP avec normalisation.
 encode_text(text) : Encode une requête textuelle en un embedding CLIP avec normalisation.
