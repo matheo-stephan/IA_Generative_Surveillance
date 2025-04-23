@@ -61,12 +61,14 @@ pip install opencv-python ultralytics sentence-transformers
 
 ## ⚙️ Paramètres configurables
 
-Paramètre | Description | Valeur par défaut
-`FPS_TARGET` | Fréquence d’extraction des images | 24
-`TARGET_SIZE` | Dimensions finales des images (w, h) | (640, 360)
-`start_frame` | Frame de départ pour l'extraction | 0
-`video_path` | Chemin de la vidéo à traiter | Personnalisé
-`custom_folder` | Répertoire de sortie spécifique | (auto-généré)
+| Paramètre         | Description                                      | Valeur par défaut        |
+|------------------|--------------------------------------------------|--------------------------|
+| `FPS_TARGET`     | Fréquence d’extraction des images (images/sec)  | `24`                     |
+| `TARGET_SIZE`    | Dimensions des images redimensionnées `(w, h)`  | `(640, 360)`             |
+| `start_frame`    | Frame de départ pour l'extraction               | `0`                      |
+| `video_path`     | Chemin d'accès à la vidéo à traiter             | `"./Video/Video_2.mp4"`  |
+| `frames_base_dir`| Répertoire de stockage des frames               | `"./Frames/"`            |
+| `custom_folder`  | Répertoire de sortie personnalisé (optionnel)   | `""` (auto-généré)       |
 
 ---
 
