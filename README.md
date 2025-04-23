@@ -19,6 +19,7 @@ Ajout de documents avec :
 - Des **métadonnées** (ex : catégorie de l’image).
 
 Génération de données de test simulant de vrais embeddings d’images.
+
 Comparaison de similarité avec un **filtrage par catégorie** et un **seuil de distance cosinus** personnalisable.
 
 ---
