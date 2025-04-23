@@ -1,4 +1,4 @@
-# Surveillance avec IA générative
+# V2 avec CLIP
 
 ---
 
