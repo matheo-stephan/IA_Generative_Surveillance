@@ -1,0 +1,20 @@
+[
+    {
+        "score": 0.5672268271446228,
+        "video": "walk1.mp4",
+        "description": "man walking on street with stroller in background",
+        "frame": 118
+    },
+    {
+        "score": 0.39284849166870117,
+        "video": "Tokyo.mp4",
+        "description": "city street at night with traffic lights and buildings",
+        "frame": 200
+    },
+    {
+        "score": 0.3559011220932007,
+        "video": "velo.mp4",
+        "description": "man riding bicycle on bridge with city skyline in backgroundbicycle",
+        "frame": 0
+    }
+]
