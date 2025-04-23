@@ -103,7 +103,7 @@ Cela lancera l'analyse et générera les résultats dans le fichier results.json
 **🎯 La vidéo walk1.mp4 se distingue par un score de similarité de 0.5672 pour la requête "A person walking on an urban roadway", ce qui en fait le résultat le plus pertinent.**
 
 
-# **Conclision**   
+# **Conclusion**   
 Le modèle Florence-2 a permis d'identifier avec succès les vidéos les plus pertinentes en fonction des requêtes. Les résultats varient en fonction des scènes présentes dans les vidéos, avec une meilleure correspondance pour des requêtes liées à des personnes en mouvement, notamment la requête "A person walking on an urban roadway", où la vidéo walk1.mp4 a obtenu le meilleur score de similarité.
 
 
