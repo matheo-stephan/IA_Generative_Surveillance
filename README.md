@@ -2,22 +2,6 @@
 
 ---
 
-# 🧩 Objectif du Projet
-
-**Ce projet a pour objectif de mettre en place un benchmark vidéo basé sur le dataset UCF Crimes, permettant :**
-
-- L’extraction et le redimensionnement des frames d’une vidéo.
-- La génération d’un embedding vectoriel pour chaque frame à l’aide d’un modèle CLIP.
-- L’évaluation de robustesse via ajout de bruit ou de modifications artificielles. (optionnelle)
-- La génération d'un embedding textuel.
-- Ajout des vecteurs dans une BDD vectiorelle.
-- La recherche via similarité entre un texte et les images extraites.
-- Triage par seuil de similarité ou par similarité décroissante.
-- Extraction des frames selectionnées.
-- Creation d'une nouvelle vidéo à partir des frames extraites.
-
----
-
 # ⚙️ Dépendances
 
 **Les bibliothèques suivantes sont nécessaires au bon fonctionnement :**
